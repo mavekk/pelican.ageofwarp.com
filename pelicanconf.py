@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import os
 import sys
-sys.path.append('.')
+sys.path.append(os.curdir)
 
 from utils import filters
 JINJA_FILTERS = { 'sidebar': filters.sidebar }
