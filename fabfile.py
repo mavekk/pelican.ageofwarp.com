@@ -92,3 +92,11 @@ def gh_pages():
     rebuild()
     local("ghp-import -b {github_pages_branch} {deploy_path}".format(**env))
     local("git push origin {github_pages_branch}".format(**env))
+
+def collectstatic():
+    if os.path.isdir(DEPLOY_PATH):
+        local('mkdir -p {deploy_path}/css/ {deploy_path}/js/ {deploy_path}/fonts/ {deploy_path}/images/'.format(**env))
+        local('cp -rf {theme_path}/twenty/static/css/* {deploy_path}/css/'.format(**env))
+        local('cp -rf {theme_path}/twenty/static/js/* {deploy_path}/js/'.format(**env))
+        local('cp -rf {theme_path}/twenty/static/fonts/* {deploy_path}/fonts/'.format(**env))
+    local('cp -rf {theme_path}/twenty/static/images/* {deploy_path}/images/'.format(**env))
