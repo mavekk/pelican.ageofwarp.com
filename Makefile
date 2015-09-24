@@ -27,6 +27,8 @@ DROPBOX_DIR=~/Dropbox/Public/
 
 GITHUB_PAGES_BRANCH=gh-pages
 
+THEME=$(BASEDIR)/themes/turty
+
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
 	PELICANOPTS += -D
@@ -61,14 +63,19 @@ help:
 	@echo 'Set the RELATIVE variable to 1 to enable relative urls                    '
 	@echo '                                                                          '
 
+collect-static:
+	cp -r $(THEME)/static/* $(OUTPUTDIR)
+
 html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
+	@$(MAKE) collect-static
 
 clean:
 	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)
 
 regenerate:
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
+	@$(MAKE) collect-static
 
 serve:
 ifdef PORT
@@ -98,6 +105,7 @@ stopserver:
 
 publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+	@$(MAKE) collect-static
 
 ssh_upload: publish
 	scp -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
