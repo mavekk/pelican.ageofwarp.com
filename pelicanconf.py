@@ -38,7 +38,7 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = 10
 
-THEME = 'twenty-pelican-html5up'
+THEME = 'turty'
 
 
 # Uncomment following line if you want document-relative URLs when developing

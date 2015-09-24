@@ -2,3 +2,4 @@ pelican
 markdown
 typogrify
 ghp-import
+# pelican-themes -vs ~/projects/pelican.ageofwarp.com/themes/turty
